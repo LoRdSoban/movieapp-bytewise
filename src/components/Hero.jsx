@@ -4,7 +4,7 @@ const Hero = () => {
   const { user } = useSelector((state) => state.auth);
 
   return (
-    <section class="bg-cover bg-center h-96 flex-none relative bg-[url('https://via.placeholder.com/1920x600')]">
+    <section class="bg-cover bg-center h-96 flex-none relative bg-[url('../assets/hero.png')]">
       <div class="bg-black bg-opacity-50 h-full flex flex-col justify-center items-center">
         <h1 class="text-5xl md:text-6xl font-extrabold mb-4">
           Welcome {user && user.name}

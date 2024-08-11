@@ -4,7 +4,7 @@ const MovieCard = ({ movieData }) => {
     <div class="flex-none relative w-44 bg-gray-800 rounded-lg shadow-md m-4">
       <img
         loading="lazy"
-        src={`https://media.themoviedb.org/t/p/w440_and_h660_face${movieData.backdrop_path}`}
+        src={`https://media.themoviedb.org/t/p/w440_and_h660_face${movieData.poster_path}`}
         alt={movieData.title ? movieData.title : movieData.name}
         class="rounded-lg w-full"
       />
