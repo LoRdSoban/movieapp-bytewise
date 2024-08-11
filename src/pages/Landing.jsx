@@ -8,42 +8,39 @@ const Landing = () => {
       <Hero />
       <HorizontalMoviesList />
 
-      {/* <!-- Latest Trailers Section --> */}
-      <section class="py-8 bg-gray-800">
-        <div class="container mx-auto">
-          <h2 class="text-3xl font-bold mb-4">Latest Trailers</h2>
-          <div class="flex overflow-x-scroll space-x-4">
-            {/* <!-- Trailer Card --> */}
-            <div class="w-64 bg-gray-700 rounded-lg shadow-md">
+      <section className="py-8 bg-gray-800">
+        <div className="container mx-auto px-4">
+          <h2 className="text-3xl font-bold mb-4">Latest Trailers</h2>
+          <div className="flex overflow-x-scroll space-x-4 no-scrollbar">
+            {/* Trailer Card */}
+            <div className="w-64 bg-gray-700 rounded-lg shadow-md">
               <img
                 src="https://via.placeholder.com/256x144"
                 alt="Trailer Thumbnail"
-                class="rounded-t-lg"
+                className="rounded-t-lg"
               />
-              <div class="p-4">
-                <h3 class="text-xl font-bold">Trailer Title</h3>
-                <p class="text-gray-400 text-sm">Official Trailer</p>
+              <div className="p-4">
+                <h3 className="text-xl font-bold">Trailer Title</h3>
+                <p className="text-gray-400 text-sm">Official Trailer</p>
               </div>
             </div>
-            {/* <!-- Repeat Trailer Cards as needed --> */}
           </div>
         </div>
       </section>
 
-      {/* <!-- Footer --> */}
-      <footer class="bg-gray-800 py-8">
-        <div class="container mx-auto text-center">
-          <div class="flex justify-center space-x-4 mb-4">
-            <a href="#" class="hover:text-teal-500">
+      <footer className="bg-gray-800 py-8">
+        <div className="container mx-auto text-center px-4">
+          <div className="flex flex-col md:flex-row justify-center space-y-2 md:space-y-0 md:space-x-4 mb-4">
+            <a href="#" className="hover:text-teal-500">
               About TMDB
             </a>
-            <a href="#" class="hover:text-teal-500">
+            <a href="#" className="hover:text-teal-500">
               Contact Us
             </a>
-            <a href="#" class="hover:text-teal-500">
+            <a href="#" className="hover:text-teal-500">
               API
             </a>
-            <a href="#" class="hover:text-teal-500">
+            <a href="#" className="hover:text-teal-500">
               System Status
             </a>
           </div>
