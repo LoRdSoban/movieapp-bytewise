@@ -1,5 +1,6 @@
 import Hero from "../components/Hero";
 import HorizontalMoviesList from "../components/HorizontalMoviesList";
+import Spinner from "../components/Spinner";
 
 const Landing = () => {
   return (

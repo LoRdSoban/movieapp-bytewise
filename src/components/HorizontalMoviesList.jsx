@@ -1,74 +1,95 @@
+import { useState, useEffect } from "react";
+import axios from "axios";
 import MovieCard from "./MovieCard";
 
 const HorizontalMoviesList = () => {
-  const movies = [
-    {
-      title: "Deadpool & Wolverine",
-      backdrop_path: "/yDHYTfA3R0jFYba16jBB1ef8oIt.jpg",
-      vote_average: 7.891,
-      release_date: "2024-07-24",
+  const movies_req = {
+    method: "GET",
+    url: "https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&language=en-US&page=1&sort_by=popularity.desc",
+    headers: {
+      accept: "application/json",
+      Authorization:
+        "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI4Y2Y5NjQwMWU3MmQ5N2VmM2ZhMDA2ZGNjOWJiZDc0MyIsIm5iZiI6MTcyMzMyMDA4NS4yNTY3OTUsInN1YiI6IjY2YjdjNjE4YzE3ODZiYTY3MTNjMGI3YyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.-H2tgqAG4HJ5_0aL918yabIfkx1gmOqUsqdCsuNcWaY",
     },
-    {
-      title: "Despicable Me 4",
-      backdrop_path: "/lgkPzcOSnTvjeMnuFzozRO5HHw1.jpg",
-      vote_average: 7.361,
-      release_date: "2024-06-20",
+  };
+
+  const shows_req = {
+    method: "GET",
+    url: "https://api.themoviedb.org/3/discover/tv?include_adult=false&include_video=false&language=en-US&page=1&sort_by=popularity.desc",
+    headers: {
+      accept: "application/json",
+      Authorization:
+        "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI4Y2Y5NjQwMWU3MmQ5N2VmM2ZhMDA2ZGNjOWJiZDc0MyIsIm5iZiI6MTcyMzMyMDA4NS4yNTY3OTUsInN1YiI6IjY2YjdjNjE4YzE3ODZiYTY3MTNjMGI3YyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.-H2tgqAG4HJ5_0aL918yabIfkx1gmOqUsqdCsuNcWaY",
     },
-    {
-      title: "Bad Boys: Ride or Die",
-      backdrop_path: "/3q01ACG0MWm0DekhvkPFCXyPZSu.jpg",
-      vote_average: 7.663,
-      release_date: "2024-06-05",
-    },
-    {
-      title: "Inside Out 2",
-      backdrop_path: "/stKGOm8UyhuLPR9sZLjs5AkmncA.jpg",
-      vote_average: 7.626,
-      release_date: "2024-06-11",
-    },
-    {
-      title: "A Quiet Place: Day One",
-      backdrop_path: "/2RVcJbWFmICRDsVxRI8F5xRmRsK.jpg",
-      vote_average: 6.952,
-      release_date: "2024-06-26",
-    },
-    {
-      title: "Saving Bikini Bottom: The Sandy Cheeks Movie",
-      backdrop_path: "/r7HV1rKdUus2gJNChswMtpjpPft.jpg",
-      vote_average: 6.304,
-      release_date: "2024-08-01",
-    },
-    {
-      title: "Prey",
-      backdrop_path: "/5W1sQidR2a9e8O1vk2IDhzbT4W7.jpg",
-      vote_average: 6.466,
-      release_date: "2024-03-15",
-    },
-    {
-      title: "The Convert",
-      backdrop_path: "/tqSg1hHiSWhHAhnjDhhevaFGsP0.jpg",
-      vote_average: 6.6,
-      release_date: "2024-03-14",
-    },
-    {
-      title: "House of Ga'a",
-      backdrop_path: "/c3rwwFFVbkyEI6wPtpPd9lvovPW.jpg",
-      vote_average: 5.963,
-      release_date: "2024-07-26",
-    },
-    {
-      title: "The Garfield Movie",
-      backdrop_path: "/1wP1phHo2CROOqzv7Azs0MT5esU.jpg",
-      vote_average: 7.209,
-      release_date: "2024-04-30",
-    },
-  ];
+  };
+
+  const [movies, setMovies] = useState([]);
+  const [activeTab, setActiveTab] = useState("Movies");
+
+  const toggleTab = (tab) => {
+    setActiveTab(tab);
+  };
+
+  useEffect(() => {
+    const fetchMovies = async () => {
+      try {
+        const response = await axios.request(movies_req);
+        setMovies(response.data.results);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    const fetchTVShows = async () => {
+      try {
+        const response = await axios.request(shows_req);
+        setMovies(response.data.results);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    if (activeTab === "Movies") {
+      fetchMovies();
+    } else {
+      fetchTVShows();
+    }
+
+    // Cleanup function (if needed)
+    return () => {
+      // Clean up logic if necessary
+    };
+  }, [activeTab]);
 
   return (
-    <section class="pt-8">
-      <div class="container mx-auto">
-        <h2 class="text-3xl font-bold mb-4 pl-4">Trending</h2>
-        <div class="flex overflow-x-scroll space-x-4">
+    <section className="pt-8">
+      <div className="container mx-auto">
+        <div className="flex justify-between items-center mb-4 pl-4">
+          <h2 className="text-3xl font-bold">Trending</h2>
+          <div className="flex">
+            <button
+              className={`px-4 py-2 rounded-l-lg ${
+                activeTab === "Movies"
+                  ? "bg-teal-500 text-white"
+                  : "bg-gray-200 text-black"
+              }`}
+              onClick={() => toggleTab("Movies")}
+            >
+              Movies
+            </button>
+            <button
+              className={`px-4 py-2 rounded-r-lg ${
+                activeTab === "TV Shows"
+                  ? "bg-teal-500 text-white"
+                  : "bg-gray-200 text-black"
+              }`}
+              onClick={() => toggleTab("TV Shows")}
+            >
+              TV Shows
+            </button>
+          </div>
+        </div>
+        <div className="flex overflow-x-scroll space-x-4">
           {movies.map((movie, index) => (
             <MovieCard key={index} movieData={movie} />
           ))}

@@ -4,11 +4,15 @@ import {
   Switch,
   Routes,
 } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 import NavBar from "./components/NavBar";
 import Landing from "./pages/Landing";
 import Movies from "./pages/Movies";
 import TvShows from "./pages/TvShows";
-import Profile from "./pages/Profile";
+import Login from "./pages/Login";
+import Register from "./pages/Register";
 
 const App = () => {
   return (
@@ -20,10 +24,12 @@ const App = () => {
             <Route path="/" element={<Landing />} />
             <Route path="/movies" element={<Movies />} />
             <Route path="/tv-shows" element={<TvShows />} />
-            <Route path="/my-profile" element={<Profile />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/register" element={<Register />} />
           </Routes>
         </div>
       </Router>
+      <ToastContainer />
     </>
   );
 };
